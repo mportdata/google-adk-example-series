@@ -8,4 +8,4 @@
 
 ## 04 Sub Agents as Tools
 
-## 05 Sequential Sub Agents
+## 05 Sequential Agent
