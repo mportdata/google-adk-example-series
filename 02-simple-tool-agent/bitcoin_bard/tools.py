@@ -1,7 +1,22 @@
 import requests
 
 
-def get_current_bitcoin_price():
+def get_current_bitcoin_price() -> dict:
+    """
+    Fetches the current Bitcoin price in USD using the CoinGecko API.
+
+    The function makes a GET request to CoinGecko's `/simple/price` endpoint.
+    If the request is successful and the response is valid JSON, the current
+    Bitcoin price in USD is extracted and returned.
+
+    Returns
+    -------
+    dict
+        A dictionary with a single key 'current_bitcoin_price':
+        - On success: the Bitcoin price as a float or int.
+        - On JSON parse error: an error message string.
+        - On request failure: an error message string.
+    """
     url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
 
     try:
@@ -11,11 +26,9 @@ def get_current_bitcoin_price():
 
         try:
             bitcoin_price = data["bitcoin"]["usd"]
-            return bitcoin_price
+            return {"current_bitcoin_price": bitcoin_price}
         except (KeyError, TypeError) as e:
-            print(f"Error parsing JSON response: {e}")
-            return None
+            return {"current_bitcoin_price": f"Error parsing JSON response: {e}"}
 
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching Bitcoin price: {e}")
-        return None
+        return {"current_bitcoin_price": f"Error fetching Bitcoin price: {e}"}
