@@ -6,6 +6,4 @@
 
 ## 03 Distinct Sub Agents
 
-## 04 Sub Agents as Tools
-
 ## 05 Sequential Agent
